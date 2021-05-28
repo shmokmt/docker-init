@@ -6,9 +6,11 @@ RUN \
     apt install -y supervisor
 
 WORKDIR /go/src
+COPY go.mod .
+# COPY go.sum .
+RUN go mod download
 
 COPY ./main.go ./
-COPY ./go.mod ./
 
 ARG GOOS=linux
 ARG GOARCH=amd64
